@@ -1,2 +1,1 @@
-export { CheckoutComponent } from "./app/components/CheckoutComponent";
-export { createPayment } from "./app/utils/createPayment";
+export { default as Checkout } from "./components/Checkout";

@@ -1,4 +1,3 @@
-import { CheckoutComponent } from "..";
 export default function Home() {
-    return <CheckoutComponent />;
+    return <>This is checkout component</>;
 }
