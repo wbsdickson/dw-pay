@@ -1,7 +1,7 @@
-import { paymentStore } from "@/lib/db";
+import {getAllData} from "@/lib/db"
 
 export default async function Home() {
-    let allPayment = paymentStore.getAllData();
+    let allPayment = getAllData();
     console.log("home page list");
     console.table(allPayment);
     return (

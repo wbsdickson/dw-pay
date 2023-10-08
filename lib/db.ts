@@ -1,58 +1,45 @@
 import { v4 as uuidv4 } from "uuid";
 import { Checkout, PaymentIntent, Store } from "./types";
 
-class PaymentStore {
-    private static instance: PaymentStore;
-    private data: Store = {};
+// Create an in-memory object to store data
+const data: Store = {};
 
-    private constructor() {}
+export const getAllData = async (): Promise<Store> => {
+    return data;
+};
 
-    public static getInstance(): PaymentStore {
-        if (!PaymentStore.instance) {
-            console.log("construction new instance");
-            PaymentStore.instance = new PaymentStore();
-        }
-        return PaymentStore.instance;
-    }
+export const getPaymentIntent = async (id: string): Promise<PaymentIntent | null> => {
+    return data[id] || null;
+};
 
-    public async getAllData(): Promise<Store> {
-        return this.data;
-    }
+export const updateSpecificData = async (id: string, updatedCheckout: PaymentIntent): Promise<void> => {
+    data[id] = {
+        ...updatedCheckout,
+        transactionTS: new Date(),
+    };
+};
 
-    public async getPaymentIntent(id: string): Promise<PaymentIntent | null> {
-        return this.data[id] || null;
-    }
+export const createPaymentIntent = async (checkout: Checkout): Promise<string> => {
+    const id = uuidv4(); // Generates a unique ID for the checkout
+    data[id] = {
+        status: "pending",
+        transactionTS: null,
+        cardHolderName: "",
+        cardNumber: "",
+        cvc: "",
+        expiryMonth: "",
+        expiryYear: "",
+        ...checkout,
+    };
+    return id; // Returning the generated ID for reference
+};
 
-    public async updateSpecificData(id: string, updatedCheckout: PaymentIntent): Promise<void> {
-        this.data[id] = {
-            ...updatedCheckout,
-            transactionTS: new Date(),
-        };
-    }
+export const deleteAllData = async (): Promise<void> => {
+    Object.keys(data).forEach((key) => {
+        delete data[key];
+    });
+};
 
-    public async createPaymentIntent(checkout: Checkout): Promise<string> {
-        const id = uuidv4();
-        this.data[id] = {
-            status: "pending",
-            transactionTS: null,
-            cardHolderName: "",
-            cardNumber: "",
-            cvc: "",
-            expiryMonth: "",
-            expiryYear: "",
-            ...checkout,
-        };
-        return id;
-    }
-
-    public async deleteAllData(): Promise<void> {
-        this.data = {};
-    }
-
-    public async deleteSpecificData(id: string): Promise<void> {
-        delete this.data[id];
-    }
-}
-
-// Export a single instance of PaymentStore
-export const paymentStore = PaymentStore.getInstance();
+export const deleteSpecificData = async (id: string): Promise<void> => {
+    delete data[id];
+};
