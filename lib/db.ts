@@ -2,8 +2,8 @@ import jsonfile from "jsonfile";
 import { v4 as uuidv4 } from "uuid";
 import { Checkout, PaymentIntent, Store } from "./types";
 import path from "path";
-const FILE_PATH = path.join(path.resolve("./lib/payment-store.json"));
 
+const FILE_PATH = path.join(process.cwd(), "lib", "payment-store.json");
 export const getAllData = async (): Promise<Store> => {
     return jsonfile.readFile(FILE_PATH);
 };
