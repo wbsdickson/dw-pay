@@ -1,9 +1,5 @@
-import jsonfile from "jsonfile";
 import { v4 as uuidv4 } from "uuid";
-import path from "path";
 import { Checkout, PaymentIntent, Store } from "./types";
-
-const FILE_PATH = path.join(process.cwd(), "lib", "payment-store.json");
 
 class PaymentStore {
     private static instance: PaymentStore;
@@ -31,7 +27,6 @@ class PaymentStore {
             ...updatedCheckout,
             transactionTS: new Date(),
         };
-        await this.saveDataToFile();
     }
 
     public async createPaymentIntent(checkout: Checkout): Promise<string> {
@@ -46,22 +41,15 @@ class PaymentStore {
             expiryYear: "",
             ...checkout,
         };
-        await this.saveDataToFile();
         return id;
     }
 
     public async deleteAllData(): Promise<void> {
         this.data = {};
-        await this.saveDataToFile();
     }
 
     public async deleteSpecificData(id: string): Promise<void> {
         delete this.data[id];
-        await this.saveDataToFile();
-    }
-
-    private async saveDataToFile(): Promise<void> {
-        await jsonfile.writeFile(FILE_PATH, this.data, { spaces: 4 });
     }
 }
 
