@@ -1,9 +1,8 @@
 import Checkout from "@/components/Checkout";
-import PaymentStore from "@/lib/db";
+import {paymentStore} from "@/lib/db";
 
 const CourseIdPage = async ({ params }: { params: { paymentIntentId: string } }) => {
     const paymentIntentId = params.paymentIntentId;
-    const paymentStore = PaymentStore.getInstance();
     const paymentIntent = await paymentStore.getPaymentIntent(paymentIntentId);
 
     if (!paymentIntent) {

@@ -9,6 +9,7 @@ class PaymentStore {
 
     public static getInstance(): PaymentStore {
         if (!PaymentStore.instance) {
+            console.log("construction new instance");
             PaymentStore.instance = new PaymentStore();
         }
         return PaymentStore.instance;
@@ -53,4 +54,5 @@ class PaymentStore {
     }
 }
 
-export default PaymentStore;
+// Export a single instance of PaymentStore
+export const paymentStore = PaymentStore.getInstance();

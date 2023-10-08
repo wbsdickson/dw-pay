@@ -1,5 +1,5 @@
 import { PaymentIntent } from "@/lib/types";
-import PaymentStore from "@/lib/db";
+import { paymentStore } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/config/nomailer";
 import axios from "axios";
@@ -13,7 +13,6 @@ export async function POST(req: Request) {
         if (Object.keys(data).length == 0) {
             throw new Error("invalid data");
         }
-        const paymentStore = PaymentStore.getInstance();
         await paymentStore.updateSpecificData(data.paymentIntentId, {
             ...data,
             status: "settled",

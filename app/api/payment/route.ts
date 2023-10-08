@@ -1,5 +1,5 @@
 import { Checkout } from "@/lib/types";
-import PaymentStore from "@/lib/db";
+import {paymentStore} from "@/lib/db";
 import { env } from "@/env";
 import { NextResponse } from "next/server";
 
@@ -7,7 +7,6 @@ export async function POST(req: Request) {
     try {
         let data: Checkout = await req.json();
         console.log("Receive payment call, ", data);
-        const paymentStore = PaymentStore.getInstance();
         let paymentIntentId = await paymentStore.createPaymentIntent(data);
         return NextResponse.json({
             url: `${env.NEXT_PUBLIC_APP_URL}/checkout/${paymentIntentId}`,
