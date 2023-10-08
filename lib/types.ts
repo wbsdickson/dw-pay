@@ -3,10 +3,12 @@ export type CheckoutItem = {
     quantity: number;
     price: number;
     img?: string;
+    id: string;
 };
 export type User = {
     name: string;
     email: string;
+    id: string;
 };
 export type Checkout = {
     items: Array<CheckoutItem>;
@@ -15,6 +17,7 @@ export type Checkout = {
     successURL: string;
     failURL: string;
     taxRate: number;
+    webhook: string;
 };
 export type PaymentIntent = Checkout & {
     status: string;

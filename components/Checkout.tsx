@@ -52,7 +52,7 @@ const Checkout = (props: Props) => {
             ...props,
             ...values,
         });
-        window.location.assign(data.data.url);
+        window.location = data.data.url;
     };
     const months = Array.from({ length: 12 }, (_, i) => i + 1);
     const years = Array.from({ length: 20 }, (_, i) => i + 1);
