@@ -1,13 +1,8 @@
-import {getAllData} from "@/lib/db"
+import { getAllData } from "@/lib/store-service";
 
 export default async function Home() {
-    let allPayment = getAllData();
+    let allPayment = await getAllData();
     console.log("home page list");
     console.table(allPayment);
-    return (
-        <>
-            current payments
-            {JSON.stringify(allPayment)}
-        </>
-    );
+    return <pre>{JSON.stringify(allPayment, null, 2)}</pre>;
 }

@@ -1,5 +1,5 @@
 import { Checkout } from "@/lib/types";
-import {createPaymentIntent} from "@/lib/db";
+import { createPaymentIntent } from "@/lib/store-service";
 import { env } from "@/env";
 import { NextResponse } from "next/server";
 

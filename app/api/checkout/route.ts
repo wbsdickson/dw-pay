@@ -1,5 +1,5 @@
 import { PaymentIntent } from "@/lib/types";
-import { updateSpecificData } from "@/lib/db";
+import { updateSpecificData } from "@/lib/store-service";
 import { NextResponse } from "next/server";
 import { transporter, mailOptions } from "@/config/nomailer";
 import axios from "axios";
