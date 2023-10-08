@@ -1,8 +1,9 @@
 import { getAllData } from "@/lib/store-service";
+import JSONView from "./_components/json-view";
 
 export default async function Home() {
     let allPayment = await getAllData();
     console.log("home page list");
     console.table(allPayment);
-    return <pre>{JSON.stringify(allPayment, null, 2)}</pre>;
+    return <JSONView data={allPayment}></JSONView>;
 }
