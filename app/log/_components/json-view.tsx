@@ -3,14 +3,14 @@ import { JsonView } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 export default function JSONView({ data }: any) {
     return (
-        <>
-            <h1>DW Pay transaction log</h1>
-            {data.data && data.data.length > 0 && (
+        <div className="p-4">
+            <b>DW Pay transaction log</b>
+            {data && data.length > 0 && (
                 <>
-                    <h2>Total Transaction : {data.data.length}</h2>
+                    <p>Total Transaction : {data.length}</p>
                     <JsonView data={data} />
                 </>
             )}
-        </>
+        </div>
     );
 }
