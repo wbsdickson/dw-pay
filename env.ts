@@ -2,7 +2,6 @@ import { z } from "zod";
 
 const envSchema = z.object({
     NEXT_PUBLIC_APP_URL: z.string(),
-    PORT: z.string(),
     ADMIN_EMAIL: z.string(),
     ADMIN_EMAIL_PASSWORD: z.string(),
 });
