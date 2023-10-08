@@ -1,3 +1,4 @@
+export const revalidate = 30;
 import { getAllData } from "@/lib/store-service";
 import JSONView from "./_components/json-view";
 
